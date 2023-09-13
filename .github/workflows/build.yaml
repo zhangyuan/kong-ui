@@ -1,4 +1,4 @@
-name: Build
+name: Release
 
 on:
   push:
@@ -24,7 +24,7 @@ jobs:
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v3
         with:
-          version: v1.54          
+          version: v1.54
       - run: GOOS=darwin GOARCH=amd64 go build -ldflags="-s -w" -o bin/kong-ui_amd64-darwin main.go
       - run: GOOS=darwin GOARCH=arm64 go build -ldflags="-s -w" -o bin/kong-ui_arm64-darwin main.go
       - run: GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o bin/kong-ui_amd64-linux main.go
