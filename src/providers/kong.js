@@ -1,4 +1,4 @@
-export const KONG_ADMIN_ENDPOINT=import.meta.env.VITE_KONG_ADMIN_ENDPOINT;
+export const KONG_ADMIN_ENDPOINT=import.meta.env.VITE_KONG_ADMIN_ENDPOINT || "";
 
 import axios from 'axios';
 
@@ -8,10 +8,10 @@ export class KongClient {
   }
 
   listServices() {
-    return axios.get(`${KONG_ADMIN_ENDPOINT}/services/`)
+    return axios.get(`${KONG_ADMIN_ENDPOINT}/services`)
   }
 
   listPlugins() {
-    return axios.get(`${KONG_ADMIN_ENDPOINT}/plugins/`)
+    return axios.get(`${KONG_ADMIN_ENDPOINT}/plugins`)
   }
 }

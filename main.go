@@ -10,7 +10,6 @@ import (
 	"os"
 	"strings"
 
-	"github.com/gin-gonic/gin"
 	"github.com/jessevdk/go-flags"
 )
 
@@ -35,53 +34,48 @@ func NewProxy(targetHost string) (*httputil.ReverseProxy, error) {
 	return httputil.NewSingleHostReverseProxy(url), nil
 }
 
-func ProxyRequestHandler(proxy *httputil.ReverseProxy) func(http.ResponseWriter, *http.Request) {
-	return func(w http.ResponseWriter, r *http.Request) {
-		proxy.ServeHTTP(w, r)
-	}
-}
-
 type Options struct {
-	Host string `short:"t" long:"target" description:"target host" required:"true"`
+	Target string `short:"t" long:"target" description:"target host" required:"true"`
+	Listen string `short:"l" long:"l" description:"listening port" default:":7080"`
 }
 
-func invoke(opts *Options) error {
+func NewHandler(opts Options, proxy *httputil.ReverseProxy, fileHanlder http.Handler) http.HandlerFunc {
+
+	return func(w http.ResponseWriter, r *http.Request) {
+		accept := r.Header.Get("Accept")
+		isJsonRequest := strings.Contains(accept, "application/json")
+		isHTMLRequest := strings.Contains(accept, "text/html")
+
+		if isJsonRequest {
+			proxy.ServeHTTP(w, r)
+		} else if isHTMLRequest {
+			r.URL.Path = "/"
+			fileHanlder.ServeHTTP(w, r)
+		} else {
+			fileHanlder.ServeHTTP(w, r)
+		}
+	}
+}
+
+func createMux(opts *Options) (*http.ServeMux, error) {
+
 	// setup proxy
-	proxy, err := NewProxy(opts.Host)
+	proxy, err := NewProxy(opts.Target)
 	if err != nil {
-		log.Fatalln(err)
-	}
-	http.HandleFunc("/", ProxyRequestHandler(proxy))
-	go func() {
-		if err := http.ListenAndServe(":7081", nil); err != nil {
-			log.Fatalln(err)
-		}
-	}()
-
-	// setup local server
-	router := gin.Default()
-
-	// Fallback HTML request to dist/index.html
-	router.Use(func(c *gin.Context) {
-		c.Next()
-		isHTMLRequest := strings.Contains(c.Request.Header.Get("Accept"), "text/html")
-		if c.Writer.Status() == 404 && isHTMLRequest {
-			indexFile, _ := staticFS.ReadFile("dist/index.html")
-			_, _ = c.Writer.Write(indexFile)
-			c.Status(200)
-		}
-	})
-
-	if fs, err := mustFS(); err != nil {
-
-	} else {
-		router.StaticFS("/", fs)
+		return nil, err
 	}
 
-	if err := router.Run(":7080"); err != nil {
-		return err
+	fs, err := mustFS()
+	if err != nil {
+		return nil, err
 	}
-	return nil
+
+	fileHandler := http.FileServer(fs)
+
+	mux := http.NewServeMux()
+	mux.Handle("/", NewHandler(*opts, proxy, fileHandler))
+
+	return mux, nil
 }
 
 func main() {
@@ -91,7 +85,12 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	if err := invoke(&opts); err != nil {
+	mux, err := createMux(&opts)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	if err := http.ListenAndServe(opts.Listen, mux); err != nil {
 		log.Fatalln(err)
 	}
 }
