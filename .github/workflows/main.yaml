@@ -6,14 +6,7 @@ on:
       - "**"
     tags-ignore:
       - 'v*'
-  pull_request: {}
 
 jobs:
   build:
     uses: ./.github/workflows/build.yaml
-  build2:
-    runs-on: ubuntu-22.04
-    needs: build
-    steps:
-      - uses: actions/download-artifact@v3
-      - run: ls -l binaries
