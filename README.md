@@ -27,9 +27,15 @@ go run main.go -t http://your_kong_admin_endpoint -l :9909
 
 ## Development
 
-1. Setup the local Kong instance
+1. Prepare the local Kong instance for the first run:
 
 ```
 docker compose up db -d
-docker compose run --rm kong kong migrations boostrap
+docker compose run --rm kong kong migrations bootstrap
+```
+
+2. Start the Kong instance
+
+```
+docker compose up
 ```
