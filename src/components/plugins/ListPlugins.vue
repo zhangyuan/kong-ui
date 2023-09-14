@@ -16,7 +16,7 @@
           <td>{{ plugin.name }}</td>
           <td>{{ plugin.id }}</td>
           <td>
-            <span :class="{disabled: !plugin.enabled}">{{ plugin.enabled }}</span>
+            <ion-icon :icon="checkmarkSharp" v-if="plugin.enabled"></ion-icon>
           </td>
           <td>
             <button @click="showDetails(plugin)" class="button is-small">Show Details</button>
@@ -41,10 +41,17 @@
 </style>
 
 <script>
+import { IonIcon } from '@ionic/vue';
+import { checkmarkSharp } from 'ionicons/icons';
+
 import { KongClient } from '../../providers/kong'
 const kong = new KongClient()
 
 export default {
+  components: { IonIcon },
+  setup() {
+    return { checkmarkSharp }
+  },
   data() {
     return {
       plugins: [],

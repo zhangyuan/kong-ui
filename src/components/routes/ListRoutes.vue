@@ -13,7 +13,13 @@
       <tbody>
         <tr v-for="route in routes" v-bind:key="route.id">
           <td>{{ route.name }}</td>
-          <td>{{ route.paths }}</td>
+          <td>
+            <ul>
+              <li v-for="(path, index) in route.paths" v-bind:key="index">
+                {{ path }}
+              </li>
+            </ul>
+          </td>
           <td>
             <button @click="showDetails(route)" class="button is-small">Show Details</button>
             <button @click="goToService(route)" class="button is-small">Service</button>

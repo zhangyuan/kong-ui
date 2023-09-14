@@ -13,8 +13,11 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@ionic/vue": "^7.3.4",
     "axios": "^1.5.0",
     "bulma": "^0.9.4",
+    "feather-icons": "^4.29.1",
+    "ionicons": "^7.1.2",
     "pinia": "^2.1.6",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4"
