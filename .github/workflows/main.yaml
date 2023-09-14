@@ -1,0 +1,13 @@
+name: Main
+
+on:
+  push:
+    branches:
+      - "**"
+    tags-ignore:
+      - 'v*'
+  pull_request: {}
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yaml
