@@ -46,7 +46,7 @@ export default {
     }
   },
   mounted() {
-    kong.listRoutes(this.service_id)
+    kong.listServiceRoutes(this.service_id)
       .then((response) => {
         this.routes = response.data.data
       })

@@ -24,7 +24,7 @@
           <td>{{ service.port }}</td>
           <td>
             <button class="button is-small" @click="showDetails(service)">Details</button>
-            <router-link :to="{name: 'routes', params: {service_id: service.name}}" class="button is-small">Routes</router-link>
+            <router-link :to="{name: 'service_routes', params: {service_id: service.name}}" class="button is-small">Routes</router-link>
           </td>
         </tr>
       </tbody>
