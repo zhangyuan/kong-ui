@@ -1,11 +1,11 @@
-name: build
+name: Build
 
 on:
   workflow_call:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/setup-node@v3
         with:

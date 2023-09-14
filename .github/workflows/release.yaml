@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/workflow/build.yaml
+      - uses: ./.github/workflows/build.yaml
   release:
     runs-on: ubuntu-22.04
     steps:
