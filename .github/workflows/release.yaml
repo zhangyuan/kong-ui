@@ -13,6 +13,7 @@ jobs:
     uses: ./.github/workflows/build.yaml
   release:
     runs-on: ubuntu-22.04
+    needs: build
     steps:
       - uses: actions/download-artifact@v3
       - name: Release
