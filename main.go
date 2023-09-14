@@ -2,7 +2,6 @@ package main
 
 import (
 	"embed"
-	"fmt"
 	"io/fs"
 	"log"
 	"net/http"
@@ -47,8 +46,6 @@ func NewHandler(opts Options, proxy *httputil.ReverseProxy, fileHanlder http.Han
 		isHTMLRequest := strings.Contains(accept, "text/html")
 
 		path := r.URL.Path
-
-		fmt.Println(path)
 
 		if path == "/" {
 			w.Header().Add("Location", "/ui/")
