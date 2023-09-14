@@ -10,6 +10,4 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
-    steps:
-      - uses: ./.github/workflows/build.yaml
+    uses: ./.github/workflows/build.yaml
