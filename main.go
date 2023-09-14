@@ -2,6 +2,7 @@ package main
 
 import (
 	"embed"
+	"fmt"
 	"io/fs"
 	"log"
 	"net/http"
@@ -43,16 +44,25 @@ func NewHandler(opts Options, proxy *httputil.ReverseProxy, fileHanlder http.Han
 
 	return func(w http.ResponseWriter, r *http.Request) {
 		accept := r.Header.Get("Accept")
-		isJsonRequest := strings.Contains(accept, "application/json")
 		isHTMLRequest := strings.Contains(accept, "text/html")
 
-		if isJsonRequest {
-			proxy.ServeHTTP(w, r)
-		} else if isHTMLRequest {
-			r.URL.Path = "/"
+		path := r.URL.Path
+
+		fmt.Println(path)
+
+		if path == "/" {
+			w.Header().Add("Location", "/ui/")
+			w.WriteHeader(302)
+		} else if strings.HasPrefix(path, "/ui") {
+			path = strings.TrimLeft(path, "/ui")
+			if isHTMLRequest {
+				r.URL.Path = "/"
+			} else {
+				r.URL.Path = path
+			}
 			fileHanlder.ServeHTTP(w, r)
 		} else {
-			fileHanlder.ServeHTTP(w, r)
+			proxy.ServeHTTP(w, r)
 		}
 	}
 }
