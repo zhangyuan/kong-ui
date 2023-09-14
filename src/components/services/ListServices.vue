@@ -16,13 +16,14 @@
       <tbody>
         <tr v-for="service in services" v-bind:key="service.id">
           <td>
-            <a @click="showDetails(service)">{{ service.name }}</a>
+            <router-link :to="{name: 'service', params: {service_id: service.name}}">{{ service.name }}</router-link>
           </td>
           <td>{{ service.id }}</td>
           <td>{{ service.protocol }}</td>
           <td>{{ service.host }}</td>
           <td>{{ service.port }}</td>
           <td>
+            <button class="button is-small" @click="showDetails(service)">Details</button>
             <router-link :to="{name: 'routes', params: {service_id: service.name}}" class="button is-small">Routes</router-link>
           </td>
         </tr>

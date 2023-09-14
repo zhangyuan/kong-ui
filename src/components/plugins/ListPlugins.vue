@@ -15,7 +15,9 @@
         <tr v-for="plugin in plugins" v-bind:key="plugin.id">
           <td>{{ plugin.name }}</td>
           <td>{{ plugin.id }}</td>
-          <td>{{ plugin.enabled }}</td>
+          <td>
+            <span :class="{disabled: !plugin.enabled}">{{ plugin.enabled }}</span>
+          </td>
           <td>
             <button @click="showDetails(plugin)" class="button is-small">Show Details</button>
           </td>

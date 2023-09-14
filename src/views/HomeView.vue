@@ -3,7 +3,5 @@ import Index from '../components/ShowIndex.vue'
 </script>
 
 <template>
-  <main>
-    <Index />
-  </main>
+  <Index />
 </template>

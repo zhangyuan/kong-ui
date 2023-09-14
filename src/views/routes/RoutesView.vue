@@ -6,7 +6,5 @@ import ListRoutes from '../../components/routes/ListRoutes.vue'
 </script>
 
 <template>
-  <main>
-    <list-routes :service_id="this.$route.params.service_id"/>
-  </main>
+  <ListRoutes />
 </template>

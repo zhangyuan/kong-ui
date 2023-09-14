@@ -3,7 +3,5 @@ import ListPlugins from '../../components/plugins/ListPlugins.vue'
 </script>
 
 <template>
-  <main>
-    <ListPlugins />
-  </main>
+  <ListPlugins />
 </template>

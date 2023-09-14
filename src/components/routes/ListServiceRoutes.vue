@@ -16,7 +16,6 @@
           <td>{{ route.paths }}</td>
           <td>
             <button @click="showDetails(route)" class="button is-small">Show Details</button>
-            <button @click="goToService(route)" class="button is-small">Service</button>
           </td>
         </tr>
       </tbody>
@@ -39,6 +38,7 @@ import { KongClient } from '../../providers/kong'
 const kong = new KongClient()
 
 export default {
+  props: ['service_id'],
   data() {
     return {
       routes: [],
@@ -46,7 +46,7 @@ export default {
     }
   },
   mounted() {
-    kong.listRoutes()
+    kong.listRoutes(this.service_id)
       .then((response) => {
         this.routes = response.data.data
       })
@@ -57,13 +57,6 @@ export default {
     },
     hideDetails() {
       this.route = null
-    },
-    goToService(route) {
-      kong.getRouteService(route.name)
-        .then((response) => {
-          const service = response.data
-          this.$router.push({name: "service", params: {service_id: service.name}})
-        })
     }
   }
 }
