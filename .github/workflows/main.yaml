@@ -16,4 +16,4 @@ jobs:
     needs: build
     steps:
       - uses: actions/download-artifact@v3
-      - run: ls -a
+      - run: ls -l binaries
