@@ -1,5 +1,5 @@
 <template>
-  <h1 class="title">Endpoints</h1>
+  <h1 class="title is-1">Endpoints</h1>
 
   <div class="container">
     <table class="table is-fullwidth is-striped is-hoverable">

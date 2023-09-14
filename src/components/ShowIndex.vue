@@ -3,9 +3,7 @@
 </script>
 
 <template>
-  <div class="box"><router-link :to="{name: 'services'}">Services</router-link></div>
-  <div class="box"><router-link :to="{name: 'routes'}">Routes</router-link></div>
-  <div class="box"><router-link :to="{name: 'plugins'}">Plugins</router-link></div>
-  <div class="box"><router-link :to="{name: 'node'}">Node Information</router-link></div>
-  <div class="box"><router-link :to="{name: 'endpoints'}">Endpoints</router-link></div>
+  <div class="block">
+    Please use the navigation bar to explore Kong Admin API.
+  </div>
 </template>

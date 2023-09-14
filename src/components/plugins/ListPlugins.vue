@@ -1,5 +1,5 @@
 <template>
-  <h1 class="title">Plugins</h1>
+  <h1 class="title is-1">Plugins</h1>
 
   <div class="container">
     <table class="table is-fullwidth">

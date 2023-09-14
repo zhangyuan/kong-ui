@@ -1,5 +1,5 @@
 <template>
-  <h1 class="title">Routes</h1>
+  <h1 class="title is-1">Routes</h1>
 
   <div class="container">
     <table class="table is-fullwidth">

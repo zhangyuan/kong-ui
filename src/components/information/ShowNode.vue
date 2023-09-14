@@ -1,5 +1,5 @@
 <template>
-  <h1 class="title">Node</h1>
+  <h1 class="title is-1">Node</h1>
 
   <div>
     <pre>{{ JSON.stringify(node, null, 2) }}</pre>
