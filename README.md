@@ -24,3 +24,12 @@ npm install
 npm build
 go run main.go -t http://your_kong_admin_endpoint -l :9909
 ```
+
+## Development
+
+1. Setup the local Kong instance
+
+```
+docker compose up db -d
+docker compose run --rm kong kong migrations boostrap
+```

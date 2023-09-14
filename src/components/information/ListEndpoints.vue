@@ -2,19 +2,9 @@
   <h1 class="title is-1">Endpoints</h1>
 
   <div class="container">
-    <table class="table is-fullwidth is-striped is-hoverable">
-      <thead>
-        <tr>
-          <th>Endpoint</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr v-for="endpoint in endpoints" v-bind:key="endpoint">
-          <span>{{ endpoint }}</span>
-        </tr>
-      </tbody>
-    </table>
+    <ul>
+      <li v-for="endpoint in endpoints" v-bind:key="endpoint">{{ endpoint }}</li>
+    </ul>
   </div>
 </template>
 

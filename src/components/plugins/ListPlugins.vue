@@ -1,7 +1,10 @@
 <template>
   <h1 class="title is-1">Plugins</h1>
 
-  <div class="container">
+  <div v-if="plugins === null">Loading...</div>
+  <div v-else-if="plugins.length === 0">No plugins.</div>
+
+  <div v-else class="container">
     <table class="table is-fullwidth">
       <thead>
         <tr>
@@ -54,7 +57,7 @@ export default {
   },
   data() {
     return {
-      plugins: [],
+      plugins: null,
       plugin: null,
     }
   },

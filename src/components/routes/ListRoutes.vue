@@ -1,7 +1,9 @@
 <template>
   <h1 class="title is-1">Routes</h1>
 
-  <div class="container">
+  <div v-if="routes === null">Loading...</div>
+  <div v-else-if="routes.length === 0">No routes.</div>
+  <div v-else class="container">
     <table class="table is-fullwidth">
       <thead>
         <tr>
@@ -47,7 +49,7 @@ const kong = new KongClient()
 export default {
   data() {
     return {
-      routes: [],
+      routes: null,
       route: null,
     }
   },

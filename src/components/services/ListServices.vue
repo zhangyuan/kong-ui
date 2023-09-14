@@ -1,6 +1,10 @@
 <template>
-  <h1 class="title">Services</h1>
-  <div>
+  <h1 class="title is-1">Services</h1>
+  <div v-if="services === null">Loading...</div>
+
+  <div v-else-if="services.length === 0">No services.</div>
+
+  <div v-else>
     <table class="table is-fullwidth">
       <thead>
         <tr>
@@ -57,7 +61,7 @@ export default {
   },
   data() {
     return {
-      services: [],
+      services: null,
       service: null
     }
   },
