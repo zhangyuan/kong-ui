@@ -1,9 +1,10 @@
 <template>
   <h1 class="title is-1">Node</h1>
 
-  <div>
+  <div v-if="node">
     <pre>{{ JSON.stringify(node, null, 2) }}</pre>
   </div>
+  <div v-else>Loading...</div>
 </template>
 
 <script>

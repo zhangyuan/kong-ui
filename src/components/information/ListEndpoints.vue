@@ -2,9 +2,11 @@
   <h1 class="title is-1">Endpoints</h1>
 
   <div class="container">
-    <ul>
+    <ul v-if="endpoints">
       <li v-for="endpoint in endpoints" v-bind:key="endpoint">{{ endpoint }}</li>
     </ul>
+
+    <div v-else>Loading...</div>
   </div>
 </template>
 
