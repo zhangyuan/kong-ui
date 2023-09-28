@@ -36,7 +36,7 @@ export class KongClient {
   }
 
   requestURL(path) {
-    let endpoint = import.meta.env.VITE_KONG_ADMIN_ENDPOINT;
+    let endpoint = import.meta.env.VITE_KONG_ADMIN_ENDPOINT || "";
     if (endpoint.endsWith("/")) {
       endpoint = endpoint.slice(0, -1)
     }

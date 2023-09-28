@@ -47,7 +47,7 @@ func NewHandler(opts Options, proxy *httputil.ReverseProxy, fileHanlder http.Han
 
 		path := r.URL.Path
 
-		if path == "/" {
+		if path == "/" && isHTMLRequest {
 			w.Header().Add("Location", "/ui/")
 			w.WriteHeader(302)
 		} else if strings.HasPrefix(path, "/ui") {
