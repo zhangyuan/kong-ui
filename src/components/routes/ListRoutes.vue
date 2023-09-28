@@ -9,6 +9,7 @@
         <tr>
           <th>Name</th>
           <th>Paths</th>
+          <th>Preserve Host</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -22,6 +23,7 @@
               </li>
             </ul>
           </td>
+          <td><ion-icon :icon="checkmarkSharp" v-if="route.preserve_host"></ion-icon></td>
           <td>
             <button @click="showDetails(route)" class="button is-small">Show Details</button>
             <button @click="goToService(route)" class="button is-small">Service</button>
@@ -44,9 +46,16 @@
 
 <script>
 import { KongClient } from '../../providers/kong'
+import { IonIcon } from '@ionic/vue';
+import { checkmarkSharp } from 'ionicons/icons';
+
 const kong = new KongClient()
 
 export default {
+  components: { IonIcon },
+  setup() {
+    return { checkmarkSharp }
+  },
   data() {
     return {
       routes: null,
